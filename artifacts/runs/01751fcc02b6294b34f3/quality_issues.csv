@@ -1,0 +1,10 @@
+source,source_row,record_id,severity,rule,detail
+po_events,19,PE-CASE-BAD-PO-HISTORY-03,QUARANTINE,INVALID_PO_HISTORY,unknown PO state
+invoices,7,INV-CASE-BAD-AMOUNT,QUARANTINE,INVALID_INVOICE_ROW,"amount_minor must be integer minor units, not a decimal guess"
+invoices,10,INV-CASE-BAD-TIMESTAMP,QUARANTINE,INVALID_INVOICE_ROW,day is out of range for month
+invoices,17,INV-CASE-CONFLICT-DUPLICATE,QUARANTINE,CONFLICTING_DUPLICATE_ID,all competing source rows quarantined
+invoices,18,INV-CASE-CONFLICT-DUPLICATE,QUARANTINE,CONFLICTING_DUPLICATE_ID,all competing source rows quarantined
+invoices,24,INV-CASE-EXACT-DUPLICATE,DUPLICATE_REMOVED,EXACT_DUPLICATE,identical after logged safe normalization
+invoices,15,INV-CASE-COMMERCIAL-COLLISION-A,UNKNOWN,POSSIBLE_DUPLICATE_DOCUMENT,different source IDs share a supplier/document reference; retained as UNKNOWN
+invoices,16,INV-CASE-COMMERCIAL-COLLISION-B,UNKNOWN,POSSIBLE_DUPLICATE_DOCUMENT,different source IDs share a supplier/document reference; retained as UNKNOWN
+case_events,4,CE-BAD-CASE-HISTORY,QUARANTINE,INVALID_CASE_HISTORY,"expected ISO timestamp with seconds, timezone and at most six fractional digits"

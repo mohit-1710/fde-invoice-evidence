@@ -1,0 +1,28 @@
+{
+  "completeness": {
+    "case_history_complete": true,
+    "invoice_feed_complete": true,
+    "po_history_complete": true,
+    "po_registry_complete": true
+  },
+  "dataset_kind": "synthetic",
+  "default_as_of": "2026-08-31T18:00:00Z",
+  "default_start": "2026-08-01T00:00:00Z",
+  "exported_at": "2026-09-01T12:00:00Z",
+  "files": {
+    "ap_case_events.csv": {
+      "sha256": "93ea29315fc6054b611ee77c5a011f73564c2f954a32f600f11581c514a1767a"
+    },
+    "ap_invoices.csv": {
+      "sha256": "cd7d216b70bcf3e534042b2251f0e654d39164ac046dbc53b9cc0ee1c73518e3"
+    },
+    "procurement.sqlite": {
+      "sha256": "e2a9276f422a6defb26d713fd6b09a23eb18ee8511ef9f7e586e2fffd02454c8"
+    }
+  },
+  "history_start": "2026-07-01T00:00:00Z",
+  "organisation": "Fictional Alder Vale Services — demonstration only",
+  "schema_version": 1,
+  "seed": 20260918,
+  "synthetic_design_note": "All operational records and interactions are fictional. Scenario frequencies are deliberately chosen tests, not measured or estimated organisational data. Declared completeness bounds this generated snapshot and is not evidence about any real system. No time savings, payment outcome or intervention benefit has been measured."
+}

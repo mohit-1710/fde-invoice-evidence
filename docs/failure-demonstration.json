@@ -1,0 +1,71 @@
+{
+  "demonstration": "Alter a copied CSV without changing its declared hash, then restore it.",
+  "dataset_kind": "SYNTHETIC",
+  "run_id": "01751fcc02b6294b34f3",
+  "checks": {
+    "initial_success": true,
+    "altered_snapshot_rejected_with_exit_2": true,
+    "previous_latest_bytes_unchanged_on_failure": true,
+    "last_attempt_explicitly_failed": true,
+    "rejected_raw_bytes_preserved": true,
+    "previous_success_still_verifies": true,
+    "restored_source_reproduces_same_run": true,
+    "project_inputs_and_artifacts_untouched": true
+  },
+  "observations": [
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "run",
+        "--sources",
+        "<temporary>/sources",
+        "--artifacts",
+        "<temporary>/artifacts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"SUCCESS\",\n  \"run_dir\": \"<temporary>/artifacts/runs/01751fcc02b6294b34f3\",\n  \"dataset_kind\": \"synthetic\",\n  \"primary\": {\n    \"definition\": \"Arrival confirmed PO-evidence exception invoices / arrival assessable eligible canonical invoice records. Assessable means READY + EXCEPTION.\",\n    \"denominator\": 79,\n    \"eligible_count\": 90,\n    \"metric_id\": \"arrival_confirmed_exception_rate\",\n    \"numerator\": 37,\n    \"percentage\": 46.84,\n    \"unit\": \"percent\",\n    \"unknown_count\": 11,\n    \"zero_denominator_explanation\": null\n  },\n  \"report\": \"<temporary>/artifacts/runs/01751fcc02b6294b34f3/report.html\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "run",
+        "--sources",
+        "<temporary>/sources",
+        "--artifacts",
+        "<temporary>/artifacts"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "FAILED: input hash differs from declared export: ap_invoices.csv; no new successful report published (attempt 20260918T141048-aa8747b0)\n"
+    },
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "verify",
+        "--artifacts",
+        "<temporary>/artifacts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"HASHES_VERIFIED\",\n  \"run_id\": \"01751fcc02b6294b34f3\",\n  \"last_attempt\": \"FAILED\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "run.py",
+        "run",
+        "--sources",
+        "<temporary>/sources",
+        "--artifacts",
+        "<temporary>/artifacts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"SUCCESS\",\n  \"run_dir\": \"<temporary>/artifacts/runs/01751fcc02b6294b34f3\",\n  \"dataset_kind\": \"synthetic\",\n  \"primary\": {\n    \"definition\": \"Arrival confirmed PO-evidence exception invoices / arrival assessable eligible canonical invoice records. Assessable means READY + EXCEPTION.\",\n    \"denominator\": 79,\n    \"eligible_count\": 90,\n    \"metric_id\": \"arrival_confirmed_exception_rate\",\n    \"numerator\": 37,\n    \"percentage\": 46.84,\n    \"unit\": \"percent\",\n    \"unknown_count\": 11,\n    \"zero_denominator_explanation\": null\n  },\n  \"report\": \"<temporary>/artifacts/runs/01751fcc02b6294b34f3/report.html\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

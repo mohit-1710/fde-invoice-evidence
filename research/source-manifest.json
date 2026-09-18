@@ -1,0 +1,100 @@
+{
+  "research_cutoff": "2026-09-18",
+  "manifest_created_utc": "2026-09-18T13:25:00.779550+00:00",
+  "sources": [
+    {
+      "local_file": "2026-04-finance.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2026/05/13.2-M01-Finance-Report.pdf",
+      "title": "April finance report, period ending 2026-04-30",
+      "locator": "15,16",
+      "bytes": 1438029,
+      "sha256": "86c2aedf653feb78a45ff3640789934726b11b306b21872415cd7720b92a88cc"
+    },
+    {
+      "local_file": "2026-06-finance.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2026/07/11.2-M03-Finance-Report.pdf",
+      "title": "June finance report, period ending 2026-06-30",
+      "locator": "15,16",
+      "bytes": 1531999,
+      "sha256": "c9db0ad311ea840c980c7d08e8435fdd56dfd0c6dab17c1e0787814b59f44547"
+    },
+    {
+      "local_file": "2026-06-finance-front.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2026/07/11.1-M03-Finance-Report_Front-Sheet.pdf",
+      "title": "June finance report front sheet, committee 2026-07-28",
+      "locator": "1",
+      "bytes": 279706,
+      "sha256": "ca79a7071ef79551c7ccd7b61c79c68bbd650a297adb5ae3ffcb8d08b79e3b9e"
+    },
+    {
+      "local_file": "2019-01-board.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2021/05/1901_Trust-Board-papers_January-2019-compressed.pdf",
+      "title": "Board meeting 2019-01-30",
+      "locator": "95",
+      "bytes": 6809806,
+      "sha256": "0f36fc3bb9b4b746b08b2d218a4546136b0809e1649aca0f9383f1d6f59e697d"
+    },
+    {
+      "local_file": "2026-05-board-minutes.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2026/07/04.-Draft-Trust-Board-Meeting-in-Public-Minutes-28-May-2026.pdf",
+      "title": "Draft May board minutes published in July bundle",
+      "locator": "full text searched for procurement/training",
+      "bytes": 227123,
+      "sha256": "c7d59e9a7178c4f4d1d6b67ea595600495c9db0da3f2a7509d0a4f7bbd8c9fe1"
+    },
+    {
+      "local_file": "2026-07-finance-committee.pdf",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-content/uploads/2026/07/09-Chair-Report-Finance-and-Business-Performance-Committee-28.07.2026_NF.pdf",
+      "title": "July finance committee report",
+      "locator": "full text searched for procurement/training",
+      "bytes": 206130,
+      "sha256": "d42a4ed9c505645e4f6a5f4d247372545d489a82ca39419b9c3575a7c1a11f8f"
+    },
+    {
+      "local_file": "bht-board-2026-api.json",
+      "url": "https://www.buckshealthcare.nhs.uk/wp-json/wp/v2/pages/43064",
+      "title": "Official 2026 board index API",
+      "locator": "content.rendered",
+      "bytes": 10574,
+      "sha256": "3c4ba9d83339d7f5533cd1e979079527adaf30691ba54a2e90171838f4042957"
+    },
+    {
+      "local_file": "board-index.html",
+      "url": "https://www.buckshealthcare.nhs.uk/publications/trust-board-papers/",
+      "title": "Board index",
+      "locator": "2026 link",
+      "bytes": 72903,
+      "sha256": "8a6dad7dac673e50a60b82c4a778f701e745a016bb5947d9e681b584f880e921"
+    },
+    {
+      "local_file": "july-board.html",
+      "url": "https://www.buckshealthcare.nhs.uk/documents/v-trust-board-papers-july-2026/",
+      "title": "July meeting bundle",
+      "locator": "finance link; document date",
+      "bytes": 77296,
+      "sha256": "df87472cdd104c2530fb0c4be398df3f840773a91a8cf4e4c520645266fa922d"
+    },
+    {
+      "local_file": "may-board.html",
+      "url": "https://www.buckshealthcare.nhs.uk/documents/w-trust-board-papers-may-2026/",
+      "title": "May meeting bundle",
+      "locator": "finance link; document date",
+      "bytes": 75901,
+      "sha256": "6d11631a0170ad1d13a5262a67f91b437c1f67314a85d5a264296695c7410da1"
+    },
+    {
+      "local_file": "hmrc-gfc8-p2p.html",
+      "url": "https://www.gov.uk/government/publications/help-with-vat-compliance-controls-guidelines-for-compliance-gfc8/procure-to-pay-part-4",
+      "title": "HMRC GfC8 part 4, updated 2026-07-27",
+      "locator": "Purchase order; Receipt of supply; Tax invoice",
+      "bytes": 90452,
+      "sha256": "b5d13cecf20758caa10a05e74bb6ef17e488406f5180a94b2536f46fd7b1b235"
+    }
+  ],
+  "limitations": [
+    "Board-index freshness check is bounded, not proof of absence of all later documents.",
+    "Publication URLs containing upload year/month are not used as substitutes for report period or displayed document date.",
+    "No operational invoice records, interviews or client-authorised extracts were obtained."
+  ],
+  "archive_policy": "local_file identifies the author's local audit copy. Third-party documents and full-text extracts are not redistributed in the public repository; original URLs, page locators and hashes are retained here."
+}

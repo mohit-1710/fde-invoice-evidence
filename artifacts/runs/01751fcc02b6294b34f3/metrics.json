@@ -1,0 +1,148 @@
+{
+  "cohort": {
+    "as_of": "2026-08-31T18:00:00.000000Z",
+    "boundary": "Both endpoints inclusive; received_at determines the invoice cohort.",
+    "policy": "ROUTINE, INVOICE, positive GBP canonical records only.",
+    "start": "2026-08-01T00:00:00.000000Z"
+  },
+  "dataset_kind": "SYNTHETIC",
+  "evidence_notes": [
+    "Operational rows and interactions are synthetic; no real organisation's operational records, interviews or intervention outcomes are represented.",
+    "Arrival uses the original immutable invoice PO reference; current uses the latest eligible REFERENCE_CONFIRMED event.",
+    "Evidence must be both effective and recorded on or before the report cutoff. Pre-receipt state recorded after receipt makes arrival UNKNOWN; exact-receipt transitions have unknown ordering.",
+    "Latest effective timestamp wins. Conflicting states or references tied at that timestamp are UNKNOWN. Future events cannot change assessments.",
+    "Commercial-document collisions compare INVOICE records received on or before cutoff, including invoices before cohort start. Credit notes are a separate document kind and do not create invoice collisions.",
+    "Exclusive reason precedence: invoice history taint, commercial collision, ambiguous current reference, missing/nonexistent reference, PO history taint, unresolved identities, supplier mismatch, request mismatch, currency mismatch, creation chronology, receipt-time uncertainty, latest PO state.",
+    "A blank optional invoice request may resolve through the PO; a nonempty unknown request is UNKNOWN. A supplied unresolved request never borrows another request's owner.",
+    "READY means PO header evidence ready only. Remaining PO value, quantities, receipts, disputes, tax, invoice approval and payment are not tested; multiple invoices may share one PO.",
+    "PO condition cleared means arrival EXCEPTION and current READY. It is separate from formal AP case closure and from payment. FOLLOW_UP does not prove a change.",
+    "Unknown evidence is not counted as a confirmed exception or silently excluded from coverage. Quarantined rows never enter canonical invoice denominators.",
+    "Declared registry/history completeness and input hashes are a bounded snapshot contract, not evidence that a real source system is complete.",
+    "The current review queue and supporting exception measures cover only the selected arrival cohort, not the whole AP backlog.",
+    "The arrival exception rate is a diagnostic baseline for examining upstream failures, not a success measure for later queue handling. No intervention benefit is measured.",
+    "All next actions are unexecuted recommendations. No messages are sent."
+  ],
+  "primary": {
+    "definition": "Arrival confirmed PO-evidence exception invoices / arrival assessable eligible canonical invoice records. Assessable means READY + EXCEPTION.",
+    "denominator": 79,
+    "eligible_count": 90,
+    "metric_id": "arrival_confirmed_exception_rate",
+    "numerator": 37,
+    "percentage": 46.84,
+    "unit": "percent",
+    "unknown_count": 11,
+    "zero_denominator_explanation": null
+  },
+  "quality_controls": {
+    "arrival_unknown_by_reason": {
+      "AMBIGUOUS_PO_STATE": 1,
+      "COMMERCIAL_DOCUMENT_COLLISION": 2,
+      "INVALID_CASE_HISTORY": 1,
+      "INVALID_PO_HISTORY": 1,
+      "LATE_RECORDED_PO_STATE": 2,
+      "NO_PO_STATE_HISTORY": 1,
+      "STATE_AT_RECEIPT": 1,
+      "UNKNOWN_REQUEST_IDENTITY": 1,
+      "UNKNOWN_SUPPLIER_IDENTITY": 1
+    },
+    "case_canonical_rows": 45,
+    "case_duplicate_rows_removed": 0,
+    "case_quarantined_rows": 1,
+    "case_raw_rows": 46,
+    "current_unknown_by_reason": {
+      "AMBIGUOUS_CURRENT_REFERENCE": 1,
+      "AMBIGUOUS_PO_STATE": 1,
+      "COMMERCIAL_DOCUMENT_COLLISION": 2,
+      "INVALID_CASE_HISTORY": 1,
+      "INVALID_PO_HISTORY": 1,
+      "NO_PO_STATE_HISTORY": 1,
+      "UNKNOWN_REQUEST_IDENTITY": 1,
+      "UNKNOWN_SUPPLIER_IDENTITY": 1
+    },
+    "eligible_canonical_invoice_records": 90,
+    "excluded_canonical_invoice_records": 7,
+    "exclusions_by_reason": {
+      "AFTER_REPORT_CUTOFF": 1,
+      "BEFORE_COHORT_START": 1,
+      "CATEGORY_CAPITAL": 1,
+      "CATEGORY_EMERGENCY": 1,
+      "CATEGORY_PO_EXEMPT": 1,
+      "CREDIT_NOTE": 1,
+      "UNSUPPORTED_CURRENCY": 1
+    },
+    "invoice_canonical_rows": 97,
+    "invoice_duplicate_rows_removed": 1,
+    "invoice_quarantined_rows": 4,
+    "invoice_raw_rows": 102,
+    "invoice_row_reconciliation": {
+      "balanced": true,
+      "canonical": 97,
+      "duplicate_rows_removed": 1,
+      "quarantined": 4,
+      "raw": 102
+    },
+    "issue_count": 9,
+    "normalization_count": 914,
+    "po_event_canonical_rows": 204,
+    "po_event_duplicate_rows_removed": 0,
+    "po_event_quarantined_rows": 1,
+    "po_event_raw_rows": 205,
+    "review_queue_count": 37,
+    "unknown_case_state_count": 1
+  },
+  "supporting": {
+    "arrival_assessment_coverage": {
+      "definition": "Arrival assessable invoice records (READY + EXCEPTION) / all eligible canonical invoice records.",
+      "denominator": 90,
+      "metric_id": "arrival_assessment_coverage",
+      "numerator": 79,
+      "percentage": 87.78,
+      "unit": "percent",
+      "unknown_count": 11,
+      "zero_denominator_explanation": null
+    },
+    "open_exceptions_by_reason": {
+      "counts": {
+        "CURRENCY_MISMATCH": 1,
+        "MISSING_PO_REFERENCE": 9,
+        "PO_CANCELLED": 7,
+        "PO_CLOSED": 1,
+        "PO_NOT_APPROVED": 7,
+        "PO_NOT_FOUND": 1,
+        "REQUEST_MISMATCH": 1,
+        "SUPPLIER_MISMATCH": 1
+      },
+      "definition": "Eligible invoice records with an OPEN AP case and current EXCEPTION evidence, grouped by one exclusive reason per invoice.",
+      "metric_id": "current_open_confirmed_exceptions",
+      "total": 28,
+      "unit": "invoice records"
+    },
+    "open_exceptions_gross_value": {
+      "amount_minor": 4245405,
+      "currency": "GBP",
+      "definition": "Sum of gross invoice GBP pence for current OPEN confirmed exceptions; this is neither unpaid value nor loss.",
+      "formatted_gbp": "£42,454.05",
+      "invoice_count": 28,
+      "metric_id": "gross_open_exception_value",
+      "unit": "GBP pence"
+    },
+    "open_exceptions_median_invoice_age": {
+      "days": 21.333333333333332,
+      "definition": "Median of (report cutoff minus invoice received_at), in days, for current OPEN confirmed exceptions. This is invoice age, not elapsed exception duration.",
+      "invoice_count": 28,
+      "metric_id": "median_open_exception_invoice_age",
+      "unit": "days",
+      "zero_denominator_explanation": null
+    },
+    "open_exceptions_owner_coverage": {
+      "ap_triage_count": 5,
+      "definition": "Current OPEN confirmed exception invoice records linked through a known request/PO department to a nonempty owner_role / all current OPEN confirmed exceptions.",
+      "denominator": 28,
+      "metric_id": "open_exception_owner_coverage",
+      "numerator": 23,
+      "percentage": 82.14,
+      "unit": "percent",
+      "zero_denominator_explanation": null
+    }
+  }
+}

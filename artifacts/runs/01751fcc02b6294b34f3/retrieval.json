@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-08-31T18:00:00.000000Z",
+  "cohort_start": "2026-08-01T00:00:00.000000Z",
+  "csv_reader": "Python csv.DictReader with required named columns; original bytes preserved",
+  "raw_hashes": {
+    "ap_case_events.csv": "93ea29315fc6054b611ee77c5a011f73564c2f954a32f600f11581c514a1767a",
+    "ap_invoices.csv": "cd7d216b70bcf3e534042b2251f0e654d39164ac046dbc53b9cc0ee1c73518e3",
+    "export_manifest.json": "7ce3f053fe5ec5da221a45b35a50a73bc032d58ce9ee8e42ff369d4cb9be7b19",
+    "procurement.sqlite": "e2a9276f422a6defb26d713fd6b09a23eb18ee8511ef9f7e586e2fffd02454c8"
+  },
+  "row_counts": {
+    "case_events": 46,
+    "departments": 5,
+    "invoices": 102,
+    "po_events": 205,
+    "purchase_orders": 101,
+    "requests": 101,
+    "suppliers": 8
+  },
+  "source_contract": {
+    "completeness": {
+      "case_history_complete": true,
+      "invoice_feed_complete": true,
+      "po_history_complete": true,
+      "po_registry_complete": true
+    },
+    "dataset_kind": "synthetic",
+    "default_as_of": "2026-08-31T18:00:00Z",
+    "default_start": "2026-08-01T00:00:00Z",
+    "exported_at": "2026-09-01T12:00:00Z",
+    "files": {
+      "ap_case_events.csv": {
+        "sha256": "93ea29315fc6054b611ee77c5a011f73564c2f954a32f600f11581c514a1767a"
+      },
+      "ap_invoices.csv": {
+        "sha256": "cd7d216b70bcf3e534042b2251f0e654d39164ac046dbc53b9cc0ee1c73518e3"
+      },
+      "procurement.sqlite": {
+        "sha256": "e2a9276f422a6defb26d713fd6b09a23eb18ee8511ef9f7e586e2fffd02454c8"
+      }
+    },
+    "history_start": "2026-07-01T00:00:00Z",
+    "organisation": "Fictional Alder Vale Services \u2014 demonstration only",
+    "schema_version": 1,
+    "seed": 20260918,
+    "synthetic_design_note": "All operational records and interactions are fictional. Scenario frequencies are deliberately chosen tests, not measured or estimated organisational data. Declared completeness bounds this generated snapshot and is not evidence about any real system. No time savings, payment outcome or intervention benefit has been measured."
+  },
+  "source_types": [
+    "SQL",
+    "CSV"
+  ],
+  "sql_queries": {
+    "departments": "SELECT \"department_id\", \"name\", \"owner_role\" FROM \"departments\" ORDER BY rowid",
+    "po_events": "SELECT \"event_id\", \"po_id\", \"status\", \"effective_at\", \"recorded_at\" FROM \"po_events\" ORDER BY rowid",
+    "purchase_orders": "SELECT \"po_id\", \"request_id\", \"supplier_id\", \"currency\", \"created_at\" FROM \"purchase_orders\" ORDER BY rowid",
+    "requests": "SELECT \"request_id\", \"supplier_id\", \"department_id\", \"requested_at\", \"category\" FROM \"requests\" ORDER BY rowid",
+    "suppliers": "SELECT \"supplier_id\", \"name\" FROM \"suppliers\" ORDER BY rowid"
+  }
+}

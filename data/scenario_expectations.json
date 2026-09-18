@@ -1,0 +1,632 @@
+{
+  "schema_version": 1,
+  "dataset_kind": "synthetic",
+  "authorship": "Hand-specified from the declared evidence rules and authored scenarios; no pipeline or model output was used to create these expectations.",
+  "default_start": "2026-08-01T00:00:00Z",
+  "default_as_of": "2026-08-31T18:00:00Z",
+  "seed_scope": "Named cases and their expectations are fixed across seeds; ordinary example amounts, parties and dates vary deterministically.",
+  "interpretation": "READY means PO header evidence ready only. No matching, payment readiness, real intervention, time saving, distribution estimate or organisation calibration is claimed.",
+  "use": "Test oracle only, outside the three hashed source inputs. The pipeline must never read these labels as business inputs.",
+  "expected_invoice_reconciliation": {
+    "raw_rows": 102,
+    "canonical_rows": 97,
+    "duplicate_rows_removed": 1,
+    "quarantined_rows": 4,
+    "eligible_canonical_rows": 90,
+    "excluded_canonical_rows": 7
+  },
+  "cases": [
+    {
+      "scenario": "absent_owner",
+      "invoice_id": "INV-CASE-ABSENT-OWNER",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "PO_NOT_APPROVED",
+        "current_status": "EXCEPTION",
+        "current_reason": "PO_NOT_APPROVED",
+        "case_state": "OPEN",
+        "po_condition_cleared": false,
+        "owner_role": ""
+      },
+      "explanation": "The PO remains CREATED. Its known department has an empty owner_role; owner coverage must not invent a buyer and routing must use AP triage."
+    },
+    {
+      "scenario": "after_cutoff",
+      "invoice_id": "INV-CASE-AFTER-CUTOFF",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "AFTER_REPORT_CUTOFF"
+      },
+      "explanation": "A receipt two hours after the report cutoff is preserved in the later source export but excluded from this report."
+    },
+    {
+      "scenario": "ambiguous_current_reference",
+      "invoice_id": "INV-CASE-AMBIGUOUS-REFERENCE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "UNKNOWN",
+        "current_reason": "AMBIGUOUS_CURRENT_REFERENCE",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The original reference has sufficient arrival evidence. Two different current PO confirmations share an effective timestamp; no event-ID ordering may choose one."
+    },
+    {
+      "scenario": "ambiguous_state",
+      "invoice_id": "INV-CASE-AMBIGUOUS-STATE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "AMBIGUOUS_PO_STATE",
+        "current_status": "UNKNOWN",
+        "current_reason": "AMBIGUOUS_PO_STATE",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "APPROVED and CANCELLED share the latest effective timestamp. Event IDs or ingestion order cannot break the state tie."
+    },
+    {
+      "scenario": "approval_exactly_at_receipt",
+      "invoice_id": "INV-CASE-EQUAL-RECEIPT",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "STATE_AT_RECEIPT",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Approval shares the exact receipt timestamp; no cross-system ordering is supplied. The later cutoff does establish current approval."
+    },
+    {
+      "scenario": "before_cohort",
+      "invoice_id": "INV-CASE-BEFORE-COHORT",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "BEFORE_COHORT_START"
+      },
+      "explanation": "A valid 30 July invoice is preserved but excluded from the August arrival cohort."
+    },
+    {
+      "scenario": "capital_category",
+      "invoice_id": "INV-CASE-CAPITAL",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "CATEGORY_CAPITAL"
+      },
+      "explanation": "The declared demonstration policy explicitly excludes the CAPITAL category."
+    },
+    {
+      "scenario": "closed_case_unresolved_po",
+      "invoice_id": "INV-CASE-CLOSED",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "MISSING_PO_REFERENCE",
+        "current_status": "EXCEPTION",
+        "current_reason": "MISSING_PO_REFERENCE",
+        "case_state": "CLOSED",
+        "po_condition_cleared": false
+      },
+      "explanation": "Explicit AP closure excludes this invoice from current OPEN exception metrics, even though its PO evidence is still an exception. Closure does not mean paid."
+    },
+    {
+      "scenario": "closed_po_with_open_ap_case",
+      "invoice_id": "INV-CASE-CLOSED-PO",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "PO_CLOSED",
+        "current_status": "EXCEPTION",
+        "current_reason": "PO_CLOSED",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The latest PO state is CLOSED before receipt, requiring PO evidence review. Its AP case remains OPEN; a closed PO and a closed AP case are different entities."
+    },
+    {
+      "scenario": "commercial_collision_first_invoice",
+      "invoice_id": "INV-CASE-COMMERCIAL-COLLISION-A",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "COMMERCIAL_DOCUMENT_COLLISION",
+        "current_status": "UNKNOWN",
+        "current_reason": "COMMERCIAL_DOCUMENT_COLLISION",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Two distinct invoice source keys share supplier and commercial invoice number. Both remain canonical with UNKNOWN classification, pending data investigation."
+    },
+    {
+      "scenario": "commercial_collision_second_invoice",
+      "invoice_id": "INV-CASE-COMMERCIAL-COLLISION-B",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "COMMERCIAL_DOCUMENT_COLLISION",
+        "current_status": "UNKNOWN",
+        "current_reason": "COMMERCIAL_DOCUMENT_COLLISION",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The second source key is retained; a shared commercial reference does not authorize merging or selecting either invoice."
+    },
+    {
+      "scenario": "conflicting_duplicate",
+      "invoice_id": "INV-CASE-CONFLICT-DUPLICATE",
+      "disposition": "QUARANTINED",
+      "raw_row_count": 2,
+      "expected_canonical_count": 0,
+      "expected_quarantined_rows": 2,
+      "expected": {},
+      "explanation": "The same invoice source key appears with two different amounts. Both records must be quarantined; neither amount may be selected."
+    },
+    {
+      "scenario": "credit_note",
+      "invoice_id": "INV-CASE-CREDIT-NOTE",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "CREDIT_NOTE",
+        "amount_minor": -12500
+      },
+      "explanation": "A well-formed negative CREDIT_NOTE remains canonical as an explicit exclusion and is not netted against gross invoice value."
+    },
+    {
+      "scenario": "emergency_category",
+      "invoice_id": "INV-CASE-EMERGENCY",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "CATEGORY_EMERGENCY"
+      },
+      "explanation": "The declared demonstration policy explicitly excludes the EMERGENCY category."
+    },
+    {
+      "scenario": "exact_duplicate",
+      "invoice_id": "INV-CASE-EXACT-DUPLICATE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 2,
+      "expected_canonical_count": 1,
+      "expected_duplicate_rows_removed": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Two identical raw records represent one invoice source key and collapse to one canonical invoice with a duplicate audit entry."
+    },
+    {
+      "scenario": "future_reference",
+      "invoice_id": "INV-CASE-FUTURE-REFERENCE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "MISSING_PO_REFERENCE",
+        "current_status": "EXCEPTION",
+        "current_reason": "MISSING_PO_REFERENCE",
+        "case_state": "OPEN",
+        "po_condition_cleared": false,
+        "original_po_id": "",
+        "current_po_id": ""
+      },
+      "explanation": "The reference confirmation at 20:00 on cutoff day is too late for an 18:00 report. An export containing future history must not leak it into this cutoff."
+    },
+    {
+      "scenario": "future_state",
+      "invoice_id": "INV-CASE-FUTURE-STATE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Cancellation at 20:00 on 31 August is later than the 18:00 report cutoff and cannot affect either default assessment."
+    },
+    {
+      "scenario": "invalid_case_history_taint",
+      "invoice_id": "INV-CASE-BAD-CASE-HISTORY",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "INVALID_CASE_HISTORY",
+        "current_status": "UNKNOWN",
+        "current_reason": "INVALID_CASE_HISTORY",
+        "case_state": "UNKNOWN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Malformed CASE_CLOSED recording time taints the identified invoice and prevents automatic clearance. Its AP state requires data investigation."
+    },
+    {
+      "scenario": "invalid_po_state_taint",
+      "invoice_id": "INV-CASE-BAD-PO-HISTORY",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "INVALID_PO_HISTORY",
+        "current_status": "UNKNOWN",
+        "current_reason": "INVALID_PO_HISTORY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "A malformed state row still identifies this existing PO. Discarding it must taint the PO; an older valid approval cannot provide automatic clearance."
+    },
+    {
+      "scenario": "late_recorded_approval",
+      "invoice_id": "INV-CASE-LATE-RECORDED",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "LATE_RECORDED_PO_STATE",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Approval effective 5 August was recorded 12 August, after receipt on 10 August. It cannot be silently backfilled into arrival evidence; it is known by cutoff."
+    },
+    {
+      "scenario": "late_recorded_cancellation",
+      "invoice_id": "INV-CASE-LATE-CANCELLATION",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "LATE_RECORDED_PO_STATE",
+        "current_status": "EXCEPTION",
+        "current_reason": "PO_CANCELLED",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "Cancellation effective before receipt is recorded after receipt. Arrival is uncertain rather than retrospectively approved or cancelled; cutoff status is cancelled."
+    },
+    {
+      "scenario": "later_approval",
+      "invoice_id": "INV-CASE-LATER-APPROVAL",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "PO_NOT_APPROVED",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": true
+      },
+      "explanation": "The PO is CREATED on receipt and approved on 15 August. A follow-up does not close the AP case. Approval clears only the PO condition."
+    },
+    {
+      "scenario": "malformed_minor_unit_amount",
+      "invoice_id": "INV-CASE-BAD-AMOUNT",
+      "disposition": "QUARANTINED",
+      "raw_row_count": 1,
+      "expected_canonical_count": 0,
+      "expected_quarantined_rows": 1,
+      "expected": {},
+      "explanation": "123.45 is not an integer minor-unit amount; it must not be rounded, rescaled or parsed as GBP pence."
+    },
+    {
+      "scenario": "malformed_timestamp",
+      "invoice_id": "INV-CASE-BAD-TIMESTAMP",
+      "disposition": "QUARANTINED",
+      "raw_row_count": 1,
+      "expected_canonical_count": 0,
+      "expected_quarantined_rows": 1,
+      "expected": {},
+      "explanation": "The impossible 99 August receipt timestamp must be quarantined rather than guessed or silently dropped."
+    },
+    {
+      "scenario": "missing_reference",
+      "invoice_id": "INV-CASE-MISSING-REFERENCE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "MISSING_PO_REFERENCE",
+        "current_status": "EXCEPTION",
+        "current_reason": "MISSING_PO_REFERENCE",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "An empty invoice PO reference remains unconfirmed. A PO exists for the request, demonstrating that a missing reference does not prove no PO exists."
+    },
+    {
+      "scenario": "missing_state",
+      "invoice_id": "INV-CASE-NO-STATE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "NO_PO_STATE_HISTORY",
+        "current_status": "UNKNOWN",
+        "current_reason": "NO_PO_STATE_HISTORY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "A known PO header with no status history is insufficient approval evidence at either assessment time."
+    },
+    {
+      "scenario": "non_gbp",
+      "invoice_id": "INV-CASE-NON-GBP",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "UNSUPPORTED_CURRENCY"
+      },
+      "explanation": "A well-formed USD invoice remains canonical but is outside GBP-only metrics. No currency conversion is assumed."
+    },
+    {
+      "scenario": "po_created_after_receipt",
+      "invoice_id": "INV-CASE-LATE-CREATED",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "PO_CREATED_AFTER_RECEIPT",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": true
+      },
+      "explanation": "The PO header is created two days after receipt and approved before cutoff. Later creation cannot establish an arrival PO."
+    },
+    {
+      "scenario": "po_currency_mismatch",
+      "invoice_id": "INV-CASE-CURRENCY-MISMATCH",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "CURRENCY_MISMATCH",
+        "current_status": "EXCEPTION",
+        "current_reason": "CURRENCY_MISMATCH",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "An eligible GBP invoice points to a known EUR PO. This is different from excluding a non-GBP invoice."
+    },
+    {
+      "scenario": "po_exempt_category",
+      "invoice_id": "INV-CASE-PO-EXEMPT",
+      "disposition": "OUT_OF_SCOPE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCLUDED",
+        "current_status": "EXCLUDED",
+        "exclusion_reason": "CATEGORY_PO_EXEMPT"
+      },
+      "explanation": "The declared demonstration policy explicitly excludes the PO_EXEMPT category; this is not a real organisation policy claim."
+    },
+    {
+      "scenario": "reference_repair",
+      "invoice_id": "INV-CASE-REFERENCE-REPAIR",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "MISSING_PO_REFERENCE",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": true,
+        "original_po_id": "",
+        "current_po_id": "PO-CASE-REFERENCE-REPAIR"
+      },
+      "explanation": "The original invoice has no reference. A 12 August confirmation identifies an already-approved PO; it cannot rewrite the arrival reference."
+    },
+    {
+      "scenario": "reopened_case",
+      "invoice_id": "INV-CASE-REOPENED",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "MISSING_PO_REFERENCE",
+        "current_status": "EXCEPTION",
+        "current_reason": "MISSING_PO_REFERENCE",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The 20 August reopen supersedes the 14 August closure. The unchanged missing-reference exception returns to the open review queue."
+    },
+    {
+      "scenario": "safe_field_cleanup",
+      "invoice_id": "INV-CASE-CLEANUP",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false,
+        "received_at": "2026-08-10T10:00:00Z",
+        "amount_minor": 31050
+      },
+      "explanation": "Whitespace and lower-case contract fields normalize safely; 11:00+01:00 equals 10:00Z. No identity, date or value is guessed."
+    },
+    {
+      "scenario": "shared_po_first_invoice",
+      "invoice_id": "INV-CASE-SHARED-PO-A",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false,
+        "amount_minor": 12000
+      },
+      "explanation": "One of two distinct invoices shares a PO with three status events and repeated follow-ups. It contributes once at invoice grain; PO capacity is untested."
+    },
+    {
+      "scenario": "shared_po_second_invoice",
+      "invoice_id": "INV-CASE-SHARED-PO-B",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "READY",
+        "arrival_reason": "READY",
+        "current_status": "READY",
+        "current_reason": "READY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false,
+        "amount_minor": 18000
+      },
+      "explanation": "The second invoice remains distinct despite its shared PO. The pair has two invoices and 30000 pence, never a count or value multiplied by event joins."
+    },
+    {
+      "scenario": "unknown_reference",
+      "invoice_id": "INV-CASE-UNKNOWN-REFERENCE",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "PO_NOT_FOUND",
+        "current_status": "EXCEPTION",
+        "current_reason": "PO_NOT_FOUND",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "PO-NOT-IN-REGISTRY is absent from the declared complete registry. This is a reference-specific exception, not proof that there is no other PO."
+    },
+    {
+      "scenario": "unknown_request_identity",
+      "invoice_id": "INV-CASE-UNKNOWN-REQUEST",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "UNKNOWN_REQUEST_IDENTITY",
+        "current_status": "UNKNOWN",
+        "current_reason": "UNKNOWN_REQUEST_IDENTITY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "A nonempty invoice request identifier is absent from master data. The known PO request cannot silently replace a conflicting unknown reference."
+    },
+    {
+      "scenario": "unknown_supplier_identity",
+      "invoice_id": "INV-CASE-UNKNOWN-SUPPLIER",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "UNKNOWN",
+        "arrival_reason": "UNKNOWN_SUPPLIER_IDENTITY",
+        "current_status": "UNKNOWN",
+        "current_reason": "UNKNOWN_SUPPLIER_IDENTITY",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The invoice supplier identifier is syntactically valid but absent from master data; it must not be treated as a confirmed mismatch between known parties."
+    },
+    {
+      "scenario": "wrong_request",
+      "invoice_id": "INV-CASE-WRONG-REQUEST",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "REQUEST_MISMATCH",
+        "current_status": "EXCEPTION",
+        "current_reason": "REQUEST_MISMATCH",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The invoice request and the PO request are both known but differ; their shared supplier does not repair the request mismatch."
+    },
+    {
+      "scenario": "wrong_supplier",
+      "invoice_id": "INV-CASE-WRONG-SUPPLIER",
+      "disposition": "ELIGIBLE",
+      "raw_row_count": 1,
+      "expected_canonical_count": 1,
+      "expected": {
+        "arrival_status": "EXCEPTION",
+        "arrival_reason": "SUPPLIER_MISMATCH",
+        "current_status": "EXCEPTION",
+        "current_reason": "SUPPLIER_MISMATCH",
+        "case_state": "OPEN",
+        "po_condition_cleared": false
+      },
+      "explanation": "The invoice names known supplier SUP-02; the referenced request and PO name known supplier SUP-01."
+    }
+  ]
+}

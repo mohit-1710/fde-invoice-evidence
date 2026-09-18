@@ -1,0 +1,431 @@
+{
+  "after": {
+    "case_events": {
+      "columns": {
+        "actor_role": {
+          "distinct": 2,
+          "missing": 0
+        },
+        "effective_at": {
+          "distinct": 38,
+          "missing": 0
+        },
+        "event_id": {
+          "distinct": 45,
+          "missing": 0
+        },
+        "event_type": {
+          "distinct": 4,
+          "missing": 0
+        },
+        "invoice_id": {
+          "distinct": 41,
+          "missing": 0
+        },
+        "note": {
+          "distinct": 9,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 5,
+          "missing": 41
+        },
+        "recorded_at": {
+          "distinct": 38,
+          "missing": 0
+        }
+      },
+      "rows": 45
+    },
+    "departments": {
+      "columns": {
+        "department_id": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "name": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "owner_role": {
+          "distinct": 5,
+          "missing": 1
+        }
+      },
+      "rows": 5
+    },
+    "invoices": {
+      "columns": {
+        "amount_minor": {
+          "distinct": 64,
+          "missing": 0
+        },
+        "category": {
+          "distinct": 4,
+          "missing": 0
+        },
+        "currency": {
+          "distinct": 2,
+          "missing": 0
+        },
+        "document_type": {
+          "distinct": 2,
+          "missing": 0
+        },
+        "invoice_id": {
+          "distinct": 97,
+          "missing": 0
+        },
+        "issued_at": {
+          "distinct": 49,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 86,
+          "missing": 11
+        },
+        "received_at": {
+          "distinct": 52,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 96,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 9,
+          "missing": 0
+        },
+        "supplier_invoice_no": {
+          "distinct": 96,
+          "missing": 0
+        }
+      },
+      "rows": 97
+    },
+    "po_events": {
+      "columns": {
+        "effective_at": {
+          "distinct": 91,
+          "missing": 0
+        },
+        "event_id": {
+          "distinct": 204,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 100,
+          "missing": 0
+        },
+        "recorded_at": {
+          "distinct": 91,
+          "missing": 0
+        },
+        "status": {
+          "distinct": 4,
+          "missing": 0
+        }
+      },
+      "rows": 204
+    },
+    "purchase_orders": {
+      "columns": {
+        "created_at": {
+          "distinct": 50,
+          "missing": 0
+        },
+        "currency": {
+          "distinct": 3,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 101
+    },
+    "requests": {
+      "columns": {
+        "category": {
+          "distinct": 1,
+          "missing": 0
+        },
+        "department_id": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "requested_at": {
+          "distinct": 49,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 101
+    },
+    "suppliers": {
+      "columns": {
+        "name": {
+          "distinct": 8,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 8
+    }
+  },
+  "before": {
+    "case_events": {
+      "columns": {
+        "actor_role": {
+          "distinct": 2,
+          "missing": 0
+        },
+        "effective_at": {
+          "distinct": 39,
+          "missing": 0
+        },
+        "event_id": {
+          "distinct": 46,
+          "missing": 0
+        },
+        "event_type": {
+          "distinct": 4,
+          "missing": 0
+        },
+        "invoice_id": {
+          "distinct": 42,
+          "missing": 0
+        },
+        "note": {
+          "distinct": 10,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 5,
+          "missing": 42
+        },
+        "recorded_at": {
+          "distinct": 39,
+          "missing": 0
+        }
+      },
+      "rows": 46
+    },
+    "departments": {
+      "columns": {
+        "department_id": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "name": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "owner_role": {
+          "distinct": 5,
+          "missing": 1
+        }
+      },
+      "rows": 5
+    },
+    "invoices": {
+      "columns": {
+        "amount_minor": {
+          "distinct": 67,
+          "missing": 0
+        },
+        "category": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "currency": {
+          "distinct": 3,
+          "missing": 0
+        },
+        "document_type": {
+          "distinct": 3,
+          "missing": 0
+        },
+        "invoice_id": {
+          "distinct": 100,
+          "missing": 0
+        },
+        "issued_at": {
+          "distinct": 49,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 89,
+          "missing": 11
+        },
+        "received_at": {
+          "distinct": 54,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 99,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 10,
+          "missing": 0
+        },
+        "supplier_invoice_no": {
+          "distinct": 99,
+          "missing": 0
+        }
+      },
+      "rows": 102
+    },
+    "po_events": {
+      "columns": {
+        "effective_at": {
+          "distinct": 91,
+          "missing": 0
+        },
+        "event_id": {
+          "distinct": 205,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 100,
+          "missing": 0
+        },
+        "recorded_at": {
+          "distinct": 91,
+          "missing": 0
+        },
+        "status": {
+          "distinct": 5,
+          "missing": 0
+        }
+      },
+      "rows": 205
+    },
+    "purchase_orders": {
+      "columns": {
+        "created_at": {
+          "distinct": 50,
+          "missing": 0
+        },
+        "currency": {
+          "distinct": 3,
+          "missing": 0
+        },
+        "po_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 101
+    },
+    "requests": {
+      "columns": {
+        "category": {
+          "distinct": 1,
+          "missing": 0
+        },
+        "department_id": {
+          "distinct": 5,
+          "missing": 0
+        },
+        "request_id": {
+          "distinct": 101,
+          "missing": 0
+        },
+        "requested_at": {
+          "distinct": 49,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 101
+    },
+    "suppliers": {
+      "columns": {
+        "name": {
+          "distinct": 8,
+          "missing": 0
+        },
+        "supplier_id": {
+          "distinct": 8,
+          "missing": 0
+        }
+      },
+      "rows": 8
+    }
+  },
+  "issue_counts": {
+    "CONFLICTING_DUPLICATE_ID": 2,
+    "EXACT_DUPLICATE": 1,
+    "INVALID_CASE_HISTORY": 1,
+    "INVALID_INVOICE_ROW": 2,
+    "INVALID_PO_HISTORY": 1,
+    "POSSIBLE_DUPLICATE_DOCUMENT": 2
+  },
+  "policy": "Malformed rows are quarantined. Lost decision history taints affected entities. No missing values are guessed.",
+  "reconciliation": {
+    "case_canonical_rows": 45,
+    "case_duplicate_rows_removed": 0,
+    "case_quarantined_rows": 1,
+    "case_raw_rows": 46,
+    "invoice_canonical_rows": 97,
+    "invoice_duplicate_rows_removed": 1,
+    "invoice_quarantined_rows": 4,
+    "invoice_raw_rows": 102,
+    "issue_count": 9,
+    "normalization_count": 914,
+    "po_event_canonical_rows": 204,
+    "po_event_duplicate_rows_removed": 0,
+    "po_event_quarantined_rows": 1,
+    "po_event_raw_rows": 205
+  },
+  "uncertain_entities": {
+    "invoice_ids": {
+      "INV-CASE-BAD-CASE-HISTORY": [
+        "INVALID_CASE_HISTORY"
+      ],
+      "INV-CASE-COMMERCIAL-COLLISION-A": [
+        "POSSIBLE_DUPLICATE_DOCUMENT"
+      ],
+      "INV-CASE-COMMERCIAL-COLLISION-B": [
+        "POSSIBLE_DUPLICATE_DOCUMENT"
+      ]
+    },
+    "po_ids": {
+      "PO-CASE-BAD-PO-HISTORY": [
+        "INVALID_PO_HISTORY"
+      ]
+    }
+  }
+}

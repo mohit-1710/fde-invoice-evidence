@@ -1,0 +1,47 @@
+event_id,invoice_id,event_type,effective_at,recorded_at,po_id,actor_role,note
+CE-AMBIGUOUS-REFERENCE-A,INV-CASE-AMBIGUOUS-REFERENCE,REFERENCE_CONFIRMED,2026-08-15T09:00:00Z,2026-08-15T09:00:00Z,PO-CASE-AMBIGUOUS-REFERENCE,DEPARTMENT_BUYER,SYNTHETIC historical event. Conflicting same-time reference evidence.
+CE-AMBIGUOUS-REFERENCE-B,INV-CASE-AMBIGUOUS-REFERENCE,REFERENCE_CONFIRMED,2026-08-15T09:00:00Z,2026-08-15T09:00:00Z,PO-CASE-ALTERNATIVE-REFERENCE,DEPARTMENT_BUYER,SYNTHETIC historical event. Conflicting same-time reference evidence.
+CE-BAD-CASE-HISTORY,INV-CASE-BAD-CASE-HISTORY,CASE_CLOSED,2026-08-13T09:00:00Z,not-a-timestamp,,AP_PROCESSOR,SYNTHETIC historical event. Deliberately malformed closure history must not silently clear a case.
+CE-CASE-CLOSED-CLOSE,INV-CASE-CLOSED,CASE_CLOSED,2026-08-14T09:00:00Z,2026-08-14T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. AP case closed while PO condition remains; this is not payment.
+CE-CASE-REOPENED-CLOSE,INV-CASE-REOPENED,CASE_CLOSED,2026-08-14T09:00:00Z,2026-08-14T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. AP case closed while PO condition remains; this is not payment.
+CE-CASE-REOPENED-REOPEN,INV-CASE-REOPENED,CASE_REOPENED,2026-08-20T09:00:00Z,2026-08-20T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. AP review reopened explicitly.
+CE-FUTURE-REFERENCE,INV-CASE-FUTURE-REFERENCE,REFERENCE_CONFIRMED,2026-08-31T20:00:00Z,2026-08-31T20:00:00Z,PO-CASE-FUTURE-REFERENCE,DEPARTMENT_BUYER,SYNTHETIC historical event. Recorded after cutoff and must not change the default report.
+CE-LATER-APPROVAL-FOLLOWUP,INV-CASE-LATER-APPROVAL,FOLLOW_UP,2026-08-12T09:00:00Z,2026-08-12T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Buyer asked to inspect approval evidence.
+CE-REFERENCE-REPAIR,INV-CASE-REFERENCE-REPAIR,REFERENCE_CONFIRMED,2026-08-12T09:00:00Z,2026-08-12T09:00:00Z,PO-CASE-REFERENCE-REPAIR,DEPARTMENT_BUYER,SYNTHETIC historical event. PO reference confirmed; original invoice reference stays empty.
+CE-SHARED-A-11,INV-CASE-SHARED-PO-A,FOLLOW_UP,2026-08-11T09:00:00Z,2026-08-11T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Synthetic repeated contact tests invoice-grain aggregation.
+CE-SHARED-A-12,INV-CASE-SHARED-PO-A,FOLLOW_UP,2026-08-12T09:00:00Z,2026-08-12T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Synthetic repeated contact tests invoice-grain aggregation.
+CE-SHARED-B-11,INV-CASE-SHARED-PO-B,FOLLOW_UP,2026-08-11T09:00:00Z,2026-08-11T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Synthetic repeated contact tests invoice-grain aggregation.
+CE-SHARED-B-12,INV-CASE-SHARED-PO-B,FOLLOW_UP,2026-08-12T09:00:00Z,2026-08-12T09:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Synthetic repeated contact tests invoice-grain aggregation.
+CE-SYN-004-CLOSED,INV-SYN-004,CASE_CLOSED,2026-08-15T11:00:00Z,2026-08-15T11:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-006-FOLLOWUP,INV-SYN-006,FOLLOW_UP,2026-08-10T15:00:00Z,2026-08-10T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-007-FOLLOWUP,INV-SYN-007,FOLLOW_UP,2026-08-11T10:00:00Z,2026-08-11T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-008-FOLLOWUP,INV-SYN-008,FOLLOW_UP,2026-08-11T10:00:00Z,2026-08-11T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-009-FOLLOWUP,INV-SYN-009,FOLLOW_UP,2026-08-08T14:00:00Z,2026-08-08T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-012-CLOSED,INV-SYN-012,CASE_CLOSED,2026-08-18T15:00:00Z,2026-08-18T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-016-FOLLOWUP,INV-SYN-016,FOLLOW_UP,2026-08-10T14:00:00Z,2026-08-10T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-017-FOLLOWUP,INV-SYN-017,FOLLOW_UP,2026-08-09T13:00:00Z,2026-08-09T13:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-018-FOLLOWUP,INV-SYN-018,FOLLOW_UP,2026-08-13T12:00:00Z,2026-08-13T12:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-019-FOLLOWUP,INV-SYN-019,FOLLOW_UP,2026-08-25T15:00:00Z,2026-08-25T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-020-CLOSED,INV-SYN-020,CASE_CLOSED,2026-08-18T14:00:00Z,2026-08-18T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-024-CLOSED,INV-SYN-024,CASE_CLOSED,2026-08-08T10:00:00Z,2026-08-08T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-026-FOLLOWUP,INV-SYN-026,FOLLOW_UP,2026-08-22T12:00:00Z,2026-08-22T12:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-027-FOLLOWUP,INV-SYN-027,FOLLOW_UP,2026-08-09T10:00:00Z,2026-08-09T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-028-FOLLOWUP,INV-SYN-028,FOLLOW_UP,2026-08-06T14:00:00Z,2026-08-06T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-029-FOLLOWUP,INV-SYN-029,FOLLOW_UP,2026-08-08T11:00:00Z,2026-08-08T11:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-032-CLOSED,INV-SYN-032,CASE_CLOSED,2026-08-14T14:00:00Z,2026-08-14T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-036-FOLLOWUP,INV-SYN-036,FOLLOW_UP,2026-08-18T12:00:00Z,2026-08-18T12:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-037-FOLLOWUP,INV-SYN-037,FOLLOW_UP,2026-08-12T12:00:00Z,2026-08-12T12:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-038-FOLLOWUP,INV-SYN-038,FOLLOW_UP,2026-08-21T11:00:00Z,2026-08-21T11:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-039-FOLLOWUP,INV-SYN-039,FOLLOW_UP,2026-08-12T11:00:00Z,2026-08-12T11:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-040-CLOSED,INV-SYN-040,CASE_CLOSED,2026-08-20T13:00:00Z,2026-08-20T13:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-044-CLOSED,INV-SYN-044,CASE_CLOSED,2026-08-24T15:00:00Z,2026-08-24T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-046-FOLLOWUP,INV-SYN-046,FOLLOW_UP,2026-08-09T14:00:00Z,2026-08-09T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-047-FOLLOWUP,INV-SYN-047,FOLLOW_UP,2026-08-22T15:00:00Z,2026-08-22T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-048-FOLLOWUP,INV-SYN-048,FOLLOW_UP,2026-08-09T11:00:00Z,2026-08-09T11:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-049-FOLLOWUP,INV-SYN-049,FOLLOW_UP,2026-08-03T10:00:00Z,2026-08-03T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-052-CLOSED,INV-SYN-052,CASE_CLOSED,2026-08-29T15:00:00Z,2026-08-29T15:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
+CE-SYN-056-FOLLOWUP,INV-SYN-056,FOLLOW_UP,2026-08-20T10:00:00Z,2026-08-20T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-057-FOLLOWUP,INV-SYN-057,FOLLOW_UP,2026-08-06T13:00:00Z,2026-08-06T13:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-058-FOLLOWUP,INV-SYN-058,FOLLOW_UP,2026-08-20T12:00:00Z,2026-08-20T12:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-059-FOLLOWUP,INV-SYN-059,FOLLOW_UP,2026-08-25T10:00:00Z,2026-08-25T10:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative request for PO evidence; no resolution is implied.
+CE-SYN-060-CLOSED,INV-SYN-060,CASE_CLOSED,2026-08-27T14:00:00Z,2026-08-27T14:00:00Z,,AP_PROCESSOR,SYNTHETIC historical event. Illustrative AP case closure; payment status is not supplied.
