@@ -1,6 +1,6 @@
 # Five-minute demo cue sheet
 
-Use the [recording kit](recording-kit.md) to set up. The [speaking draft](demo-script.md) follows this exact order. This is a cue sheet for your own explanation, not an additional set of scenes.
+This is the original command-oriented preparation sheet. The delivered edited walkthrough follows the [current recording script](own-voice-script.md); its link is in the [README](../README.md). Use the [recording kit](recording-kit.md) to reproduce this command order. The [speaking draft](demo-script.md) follows this exact order. This is a cue sheet for your own explanation, not an additional set of scenes.
 
 | Time | Show | Say in your own words |
 | --- | --- | --- |
@@ -8,7 +8,7 @@ Use the [recording kit](recording-kit.md) to set up. The [speaking draft](demo-s
 | 0:40–1:25 | Real run, then source inspector | SQLite + CSV, preserved files, recorded SQL, safe currency correction and quarantined amount. One model assessment per invoice. |
 | 1:25–2:10 | Reference-repair case | 10 Aug blank reference; 12 Aug confirmation; current header passes; AP case stays OPEN. No permission to pay. |
 | 2:10–3:05 | Report measures, then Find `INV-CASE-ABSENT-OWNER` | August cohort; 37/79 = 46.84%; 11 UNKNOWN; coverage 79/90. Queue = 28 confirmed + 9 uncertain. Show the route and owner-first action. |
-| 3:05–3:50 | Rerun, verification, test summary | Same run ID; hashes verified; 51 tests; 40 known scenarios. 102 = 97 + 1 + 4. |
+| 3:05–3:50 | Rerun, verification, test summary | Same run ID; hashes verified; 52 tests; 40 known scenarios. 102 = 97 + 1 + 4. |
 | 3:50–4:55 | Failure/recovery result | Temporary copy; rejected input preserved; previous success retained; restoration reproduces output. Check existing tools and earlier PO/receipt work before deployment. |
 
 Allow the final five seconds for a clean finish. Use pauses to make the actual outputs readable, not to fill time.

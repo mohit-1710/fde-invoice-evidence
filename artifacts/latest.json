@@ -1,9 +1,9 @@
 {
   "as_of": "2026-08-31T18:00:00.000000Z",
-  "attempt_id": "20260918T141048-0a2fc265",
-  "completed_at": "2026-09-18T14:10:48.039349Z",
+  "attempt_id": "20260918T152351-c676de5c",
+  "completed_at": "2026-09-18T15:23:51.743587Z",
   "dataset_kind": "synthetic",
-  "path": "runs/01751fcc02b6294b34f3",
-  "run_id": "01751fcc02b6294b34f3",
+  "path": "runs/cff00e9b2b03ce4963f0",
+  "run_id": "cff00e9b2b03ce4963f0",
   "status": "SUCCESS"
 }

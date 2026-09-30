@@ -24,6 +24,12 @@ Have AP annotate a sample using existing records and explain unresolved cases. C
 
 ## Decision after discovery
 
+Before any trial, the AP process owner would approve the eligible invoice types, evidence rules and named escalation roles. Use consecutive eligible cases from an agreed interval, and record every exclusion and missing history. This protocol is proposed; it has not been carried out.
+
+Compare the existing report and prototype on the same cases. Have an AP reviewer first establish the supported next action from the underlying records, allowing UNKNOWN where the evidence is insufficient. Counterbalance which view processors see first to reduce practice effects. Measure elapsed time to a review decision, compare its action and route with the agreed review, and record unresolved cases rather than treating them as successes. Summarise paired time differences and the count and details of wrong routes. A small feasibility sample cannot establish an organisation-wide savings estimate.
+
+The owner must set the acceptable error and effort thresholds before inspecting results. Any recommendation to authorise payment is outside the prototype's scope and would stop the trial. Consider broader use only if the comparison shows a useful time reduction without exceeding the agreed routing-error limit, and an accountable owner accepts unresolved cases. This is a future usefulness test; it does not change the prototype's one diagnostic KPI and five supporting measures.
+
 - If the present system already gives equivalent trustworthy evidence and routing, improve its use or configuration instead of introducing another queue.
 - If annual PO setup or receipt entry consumes more review effort, prioritise that handoff. The public reports make both plausible alternatives.
 - If missing or inconsistent histories prevent reliable classification, fix the source contract and event capture before using the metric to judge performance.

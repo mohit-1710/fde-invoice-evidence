@@ -1,0 +1,39 @@
+{
+  "status": "PASSED",
+  "started_at_utc": "2026-09-18T15:23:52.004831+00:00",
+  "finished_at_utc": "2026-09-18T15:23:53.043959+00:00",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-q"
+  ],
+  "python_version": "3.9.6",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "base_commit": "cc455b6d34cb4e2ddfb33dc44ccd6fdf81b3da1e",
+  "changes_from_base_in_executed_files": [
+    "src/po_review/model.py (qualify generated evidence note; classification unchanged)",
+    "tests/test_cutoff_integrity.py (new regression test)"
+  ],
+  "run_id": "cff00e9b2b03ce4963f0",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "----------------------------------------------------------------------\nRan 52 tests in 0.979s\n\nOK\n",
+  "executed_file_sha256": {
+    "run.py": "1a1a1ac59d3981f36b27af5126c8200d16ff22da9f35875ef5620543211dcc37",
+    "src/po_review/__init__.py": "8a97158f4f574fbdd18bdb6a30e532030d0ad3b99d068b3afa211ea2bd0d24fa",
+    "src/po_review/generate.py": "6edc1703bdef25028d6f2d7a1d930ea82e4de9e9aba88bc1871dbe0c6343ca60",
+    "src/po_review/model.py": "fa1ff61b0cdb67677aeacbf34b27d6cd3515ba3b2344d7fc10b77acf11ddd5e1",
+    "src/po_review/pipeline.py": "b48d787e38390b755a3133526f5cb5a097e56c4c6a876973261d14c2c590d7a6",
+    "src/po_review/validation.py": "378f2205aac623ef364ffb0ac58300af9080e93844874e22f8a8dd9fb921a83f",
+    "tests/test_adversarial.py": "f9cdd1253cc7358976e4086257685d98ba0dfa8f1563ce7d9e2ba2c4fc1e7fb1",
+    "tests/test_cutoff_integrity.py": "95c3fd1f58120804d6e49c16fb273c1b50163dadb89b772eed443dee8474c6d3",
+    "tests/test_generate.py": "786ea6f666f466f859658e59ade8681cf3788bbee383f2f54be9926ad0c7ba60",
+    "tests/test_model.py": "1f007ab4dbf9b8d86b4d7a9b12a09960ba7dcdedf521cae10f452eb5a8c50bbf",
+    "tests/test_pipeline.py": "468132a7767a3e442d73abaaafcc3496cfd76e09d65c0950b4f6333d3eefbfd6",
+    "data/scenario_expectations.json": "65c71e09d9970779b9552b97a8d12f1b59169a8003b5974d269e66d9bdb9b576"
+  }
+}

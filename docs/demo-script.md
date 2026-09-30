@@ -1,6 +1,6 @@
 # Five-minute demo speaking notes
 
-Use these as rehearsal notes, then explain the project in your own words. The timing includes space for real commands, screen changes and readable pauses. Start with the [recording setup](recording-kit.md); keep the shorter [cue sheet](walkthrough.md) beside you during the take. No video has been recorded yet.
+Use these as rehearsal notes, then explain the project in your own words. The timing includes space for real commands, screen changes and readable pauses. Start with the [recording setup](recording-kit.md); keep the shorter [cue sheet](walkthrough.md) beside you during the take. These are the original rehearsal notes; see the [current recording script](own-voice-script.md) and the narrated walkthrough linked from the [README](../README.md).
 
 ## 0:00–0:40 · Why this problem
 
@@ -38,7 +38,7 @@ Switch to the saved HTML report. Show the primary result, coverage and all five 
 
 Run `python3 run.py run`, `python3 run.py verify`, then `python3 -m unittest discover -s tests -q`. Pause on the repeated run ID, verification status and test summary.
 
-“Rerunning selects the same run ID. Verification checks the saved files and their hashes. All 51 tests pass, including checks against 40 separately specified scenarios.
+“Rerunning selects the same run ID. Verification checks the saved files and their hashes. All 52 tests pass, including checks against 40 separately specified scenarios.
 
 “The model reduces event histories before aggregation to avoid multiplying invoice totals. The row counts also reconcile: 102 raw rows become 97 retained, one duplicate removed and four quarantined.”
 

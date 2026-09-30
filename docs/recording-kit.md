@@ -1,6 +1,6 @@
-# Record the demo in your own voice
+# Recording preparation notes
 
-The project and speaking notes are prepared. The recording itself is still to be made. Use the [cue sheet and command order](walkthrough.md) during the take, and the [spoken draft](demo-script.md) for rehearsal. Keep the cue sheet outside the captured area or on paper. Explain it in your own words once you are comfortable with the decisions.
+These notes preserve the original recording plan. The current narrated walkthrough and recording script are linked from the [project README](../README.md). Use the [cue sheet and command order](walkthrough.md) during the take, and the [spoken draft](demo-script.md) for rehearsal. Keep the cue sheet outside the captured area or on paper. Explain it in your own words once you are comfortable with the decisions.
 
 ## Set up once
 
@@ -68,6 +68,6 @@ Be able to answer these without reading the script:
 
 ## After the take
 
-Save the untouched recording as `10222_Mohit_Kumar_Demo_original.mov`. A suggested local location is `output/video/`; create it when saving. Watch the complete take once, checking voice clarity, readable results, sequence and duration. Confirm that the spoken numbers match what is on screen. The expected test result is **51 tests, OK** and the failure demonstration is **DEMONSTRATION_PASSED** with all eight checks true.
+Save the untouched recording as `10222_Mohit_Kumar_Demo_original.mov`. A suggested local location is `output/video/`; create it when saving. Watch the complete take once, checking voice clarity, readable results, sequence and duration. Confirm that the spoken numbers match what is on screen. The expected test result is **52 tests, OK** and the failure demonstration is **DEMONSTRATION_PASSED** with all eight checks true.
 
-The recording can then be trimmed and exported for sharing, with the original retained. Video hosting and its final link can be added to the repository after the recording is reviewed. No video link or completed recording is claimed yet.
+The recording can then be trimmed and exported for sharing, with the original retained. The delivered narrated walkthrough is linked from the [project README](../README.md).

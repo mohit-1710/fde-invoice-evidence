@@ -2,15 +2,15 @@
   "as_of": "2026-08-31T18:00:00.000000Z",
   "business_artifact_hashes": {
     "invoice_trace.csv": "047e02aaa906dcac65f59a6c90d887c28a9935c0ad9253f432fab662bc039c9f",
-    "metrics.json": "2554ada28998adaccd5dc618d6c379fff1bb440ee7a3f07647ee68edf36bab82",
+    "metrics.json": "9d1aa03050203bce8555b8c982e5a470c10d638bd3d1eaa07a1aadd77c52149a",
     "model.sqlite": "34f488c5f65eba56b52e9081f507e902a58b32d3f91a897ff9809ddb4cc7106a",
     "normalizations.csv": "2f01a5cf1efdc9bf66a60a8dfde798c9ae1c2ad7b2636b49c7af0107ed7dce2c",
     "quality_issues.csv": "fa1877f2ce9df85f7877eebca6b35c61d695a44e328ba82d38d17bb07b2f1910",
     "quality_profile.json": "0ff2bdc81658dc46ded26e7afe5112c2317994a198154be15037f8dd223ee0ce",
-    "report.html": "4fd9b404a0cb5127c198f9799acd05df9c4de0f6e014da9f65c0c893411e394c",
+    "report.html": "947894d2da1f0d8101529155bb4ba9c991dbed55ec382e5c9d7f3f39cbbe8302",
     "review_queue.csv": "8ea9124e308dc29f8d6346c93a757a5f70cfd33cff9ca263cee709c4e51ecca7"
   },
-  "code_fingerprint": "f41a4e5d547f57e8db80dcbbc49dc33361dc10d569eb59953de18d69a566bb2d",
+  "code_fingerprint": "4b5d23952e24cfb8c95e081b246c37c74aeda49ce09fa861aa8a68c0386e03c3",
   "cohort_start": "2026-08-01T00:00:00.000000Z",
   "dataset_kind": "synthetic",
   "raw_hashes": {
@@ -19,5 +19,5 @@
     "export_manifest.json": "7ce3f053fe5ec5da221a45b35a50a73bc032d58ce9ee8e42ff369d4cb9be7b19",
     "procurement.sqlite": "e2a9276f422a6defb26d713fd6b09a23eb18ee8511ef9f7e586e2fffd02454c8"
   },
-  "run_id": "01751fcc02b6294b34f3"
+  "run_id": "cff00e9b2b03ce4963f0"
 }

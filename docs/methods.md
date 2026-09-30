@@ -46,7 +46,7 @@ Safe changes are logged: surrounding whitespace is trimmed, contract-defined ide
 | Exact duplicate after normalization | Retain one canonical row; log removed duplicates. |
 | Conflicting rows with the same invoice ID, including a malformed competing version | Quarantine every competing row. |
 | Different invoice IDs with the same supplier/commercial-number pair | Retain records and mark eligible assessments UNKNOWN. Compare INVOICE records received by cutoff, including pre-cohort invoices; future arrivals and credit notes do not cause collisions. |
-| Invalid PO/case history with an identifiable parent | Quarantine and mark the affected evidence UNKNOWN when it could affect the cutoff. A provably future event cannot contaminate an earlier report; unresolvable timing stays conservative. |
+| Invalid PO/case history with an identifiable parent | Quarantine and mark the affected evidence UNKNOWN when it could affect the cutoff. A malformed row with provably later timestamps is ignored for that cutoff unless it conflicts with an earlier event's identity. Unresolvable timing stays conservative. |
 
 For invoices, PO events and case events, validation checks `raw = canonical + duplicates removed + quarantined`. The default invoice reconciliation is `102 = 97 + 1 + 4`. An explicitly empty feed can produce a report with null ratios. A nonempty feed whose invoices are all quarantined fails instead of presenting an empty success.
 
@@ -59,7 +59,9 @@ The current queue and all supporting exception measures remain restricted to thi
 Each eligible invoice receives two assessments:
 
 1. **Arrival:** use its immutable original PO reference and assess the header at receipt, using only evidence knowable by report cutoff. A pre-receipt state recorded after receipt makes arrival UNKNOWN; a state transition exactly at receipt also has unknown ordering.
-2. **Current:** use the latest eligible `REFERENCE_CONFIRMED` event, if present, and assess the header at cutoff. Evidence must be both effective and recorded by cutoff. The latest effective state wins; different states or confirmed references tied at that timestamp are UNKNOWN. Later evidence cannot rewrite an earlier cutoff.
+2. **Current:** use the latest eligible `REFERENCE_CONFIRMED` event, if present, and assess the header at cutoff. Valid evidence must be both effective and recorded by cutoff. The latest effective state wins; different states or confirmed references tied at that timestamp are UNKNOWN. Valid later events do not change this assessment.
+
+Source-integrity checks happen before temporal selection. If the same event ID has conflicting versions on opposite sides of the cutoff, both versions are quarantined and the earlier history becomes uncertain. A later-dated corrupt duplicate can therefore change READY to UNKNOWN; the pipeline does not guarantee isolation from every form of later source corruption. This conservative response prevents a corrupted approval from appearing trustworthy. The cutoff-integrity regression test covers the difference between a valid unique later event and a conflicting duplicate of an earlier event.
 
 Under the declared complete registry, a missing reference or nonexistent referenced PO is an EXCEPTION; neither proves no other PO exists. Known supplier/request/currency mismatches, a PO created after the assessment time, or a latest state of CREATED, CLOSED or CANCELLED are exceptions. Unresolved identity, absent/invalid/ambiguous state history and commercial collisions yield UNKNOWN. Only matching header evidence with latest state APPROVED can be READY.
 
@@ -84,6 +86,21 @@ Histories are reduced to one invoice assessment before SQL joins and aggregation
 
 UNKNOWN is absent from the primary assessable denominator and present in the coverage denominator. Quarantine, duplicates, exclusions and the 37-row review queue are quality controls, not additional project KPIs. Zero-denominator ratios and an empty-population median return JSON `null` with explanations; percentages display two decimals. Gross value is not unpaid/overdue exposure or loss; invoice age is not exception duration; a routing role is not accepted ownership.
 
+### Reconciling arrival and cutoff results
+
+The supplied [invoice trace](../artifacts/runs/cff00e9b2b03ce4963f0/invoice_trace.csv) records both assessments for each of the 90 eligible invoices. Grouping those records gives:
+
+| Arrival assessment | Current READY | Current EXCEPTION | Current UNKNOWN | Total |
+| --- | ---: | ---: | ---: | ---: |
+| READY | 41 | 0 | 1 | 42 |
+| EXCEPTION | 9 | 28 | 0 | 37 |
+| UNKNOWN | 2 | 1 | 8 | 11 |
+| Total | 52 | 29 | 9 | 90 |
+
+One of the 29 current exception cases is CLOSED, leaving **28 open confirmed exceptions**. In terms of the arrival count, this is `37 - 9 now READY + 1 from UNKNOWN - 1 CLOSED = 28`. Three arrival UNKNOWN records become assessable, including the new exception, while one previously READY record becomes UNKNOWN: `11 - 3 + 1 = 9`. Thus the review queue has **28 confirmed exceptions + 9 uncertain cases = 37 invoices**. One of these nine uncertain records also has UNKNOWN case state; it is counted once.
+
+All nine EXCEPTION-to-READY records still have OPEN AP cases. Across the cohort, ten cases are CLOSED: nine current READY and one current EXCEPTION. Passing the PO evidence checks, leaving this review queue and closing an AP case are separate outcomes. None establishes payment.
+
 ## Reproduction, verification and failure handling
 
 Run from the repository root with Python 3.9+; the commands use only the standard library:
@@ -95,13 +112,13 @@ python3 run.py verify
 python3 -m unittest discover -s tests -v
 ```
 
-The run ID hashes the preserved input hashes, normalized cohort/cutoff, schema version and package-code fingerprint. Repeated runs of unchanged inputs/code reproduce identical business artifacts. Logs, attempt IDs and completion times may differ. The [saved command transcript](reproducible-run.json) records successful reruns and verification; the current supplied run is `01751fcc02b6294b34f3`.
+The run ID hashes the preserved input hashes, normalized cohort/cutoff, schema version and package-code fingerprint. Repeated runs of unchanged inputs/code reproduce identical business artifacts. Logs, attempt IDs and completion times may differ. The [saved command transcript](reproducible-run.json) records successful reruns and verification; the current supplied run is `cff00e9b2b03ce4963f0`.
 
 Outputs are staged and verified before publication. `latest.json` is replaced atomically as the final commit point. A handled failure exits with code 2, records FAILED in `last_attempt.json`, retains available raw bytes/diagnostics and leaves the prior successful pointer intact. Available rejected file bytes are copied before hash checking. A run directory marked VERIFIED may exist without having been published. Consult both pointers: verifying old output hashes does not make a failed latest attempt successful.
 
 `verify` checks the exact expected raw/business file inventories and their saved hashes. These local, unsigned manifests detect inconsistency; they do not independently prove source authenticity or real-world completeness. Publication guarantees cover the tested handled failures of this local workflow, not every possible process or filesystem failure.
 
-On 18 September 2026 the current implementation passed all **51 tests** and saved-artifact verification. The [verification record](verification.md) describes checks against all **40 named oracle cases**, offline rerun byte equality, invoice-grain counts/value, raw preservation, null denominators, malformed data and failed publication. The adversarial regression suite checks temporal leakage, conflicting records, artifact tampering and failed publication. The [live walkthrough](walkthrough.md) uses `python3 tools/demonstrate_failure.py` to demonstrate rejection and recovery with temporary copies.
+On 18 September 2026 the current implementation passed all **52 tests** and saved-artifact verification. The [verification record](verification.md) describes checks against all **40 named oracle cases**, offline rerun byte equality, invoice-grain counts/value, raw preservation, null denominators, malformed data and failed publication. The adversarial regression suite checks temporal leakage, conflicting records, artifact tampering and failed publication. The [live walkthrough](walkthrough.md) uses `python3 tools/demonstrate_failure.py` to demonstrate rejection and recovery with temporary copies.
 
 ## Interpretation limits
 

@@ -2,6 +2,8 @@
 
 **Mohit Kumar · 24bcs10222 · Internship-exempted FDE assignment**
 
+**Submission:** [Two-page PDF](output/pdf/10222_Mohit_Kumar.pdf) · [Narrated demo (4:24)](https://drive.google.com/file/d/1zqXr-ju4dSJ-dirIlUqGPt7z8tIBcYBC/view)
+
 A small, offline Python pipeline that retrieves procurement records from SQLite and accounts-payable (AP) exports from CSV, validates them, and produces an invoice-level review queue with one KPI and five supporting metrics. It preserves the original invoice-receipt assessment separately from the assessment at the report cutoff.
 
 **All operational records are synthetic.** Fictional parties and deliberately selected scenarios exercise the rules; this is not a representative sample or an estimate of any organisation's workload. Public Buckinghamshire Healthcare NHS Trust (BHT) reports motivate the problem. BHT is not a client and none of its operational records are used. There were no interviews, deployment or measured benefits.
@@ -19,7 +21,7 @@ python3 run.py verify
 python3 -m unittest discover -s tests -v
 ```
 
-The first command after the version check prints `SUCCESS`, the run directory and the path to `report.html`. Open that HTML file locally in a browser. The report is self-contained. `verify` checks the saved raw and business-artifact hashes; the test suite should report **51 tests, OK**.
+The first command after the version check prints `SUCCESS`, the run directory and the path to `report.html`. Open that HTML file locally in a browser. The report is self-contained. `verify` checks the saved raw and business-artifact hashes; the test suite should report **52 tests, OK**.
 
 The supplied inputs already exist; `run` never generates them. To create a fresh synthetic fixture in a new directory:
 
@@ -33,7 +35,7 @@ Generation refuses to replace existing input files unless `--force` is explicitl
 
 ## Supplied result
 
-The receipt cohort runs from **1 August 2026 00:00 UTC to 31 August 2026 18:00 UTC**, including both endpoints. The cutoff is also the time of the current assessment. The queue and supporting exception measures cover only this selected arrival cohort, not the whole AP backlog. The [saved report](artifacts/runs/01751fcc02b6294b34f3/report.html) and [machine-readable metrics](artifacts/runs/01751fcc02b6294b34f3/metrics.json) contain:
+The receipt cohort runs from **1 August 2026 00:00 UTC to 31 August 2026 18:00 UTC**, including both endpoints. The cutoff is also the time of the current assessment. The queue and supporting exception measures cover only this selected arrival cohort, not the whole AP backlog. The [saved report](artifacts/runs/cff00e9b2b03ce4963f0/report.html) and [machine-readable metrics](artifacts/runs/cff00e9b2b03ce4963f0/metrics.json) contain:
 
 | Measure | Result | Interpretation |
 | --- | --- | --- |
@@ -59,6 +61,8 @@ Quality controls reconcile **102 raw invoice rows = 97 canonical + 1 exact dupli
 | `quality_profile.json`, `quality_issues.csv`, `normalizations.csv` | Before/after profiles, quarantine reasons and logged safe fixes. |
 | `artifact_manifest.json`, `run.jsonl` | Run identity, output hashes and stage log. |
 
-The [two-page submission PDF](output/pdf/10222_Mohit_Kumar.pdf) gives the problem brief and implementation evidence. The [methods](docs/methods.md) explain source authority, relationships, temporal rules and failure handling. The [own-voice recording kit](docs/recording-kit.md), [timed cue sheet](docs/walkthrough.md) and [speaking notes](docs/demo-script.md) prepare the five-minute demo; no video has been recorded yet. The [evidence ledger](research/evidence-ledger.md) records public sources and their limits. A bounded [practitioner scan](research/practitioner-scan.md) adds intake/completeness questions without inferring demand. The [existing-tool check](research/existing-tools.md) and [proposed discovery plan](docs/discovery-plan.md) explain what would need validation before a real trial; the [data contract](docs/data-contract.md) specifies the fields and rules. The [verification record](docs/verification.md) maps the assignment requirements to artifacts and explains the passing 51-test suite and **40 separately specified named scenarios**.
+For the supplied run, open the [preserved raw files](artifacts/runs/cff00e9b2b03ce4963f0/raw/), [retrieval record](artifacts/runs/cff00e9b2b03ce4963f0/retrieval.json) or [stage log](artifacts/runs/cff00e9b2b03ce4963f0/run.jsonl). The [tests](tests/), [40 expected scenarios](data/scenario_expectations.json) and [dated test execution](docs/test-execution.json) are also available directly.
+
+The [two-page submission PDF](output/pdf/10222_Mohit_Kumar.pdf) gives the problem brief and implementation evidence. The [methods](docs/methods.md) explain source authority, relationships, temporal rules and failure handling. The [current recording script](docs/own-voice-script.md) accompanies the narrated walkthrough. The original [recording kit](docs/recording-kit.md), [cue sheet](docs/walkthrough.md) and [speaking notes](docs/demo-script.md) remain as preparation material. The [evidence ledger](research/evidence-ledger.md) records public sources and their limits. A bounded [practitioner scan](research/practitioner-scan.md) adds intake/completeness questions without inferring demand. The [existing-tool check](research/existing-tools.md) and [proposed discovery plan](docs/discovery-plan.md) explain what would need validation before a real trial; the [data contract](docs/data-contract.md) specifies the fields and rules. The [verification record](docs/verification.md) maps the assignment requirements to artifacts and explains the passing 52-test suite and **40 separately specified named scenarios**.
 
 **READY means only that the declared PO header evidence checks passed.** Remaining order value, quantities, receipt of goods/services, disputes, tax, invoice approval and payment are outside scope. A closed AP case does not mean paid. Recommendations are unexecuted; the pipeline sends no messages and authorises no payment.

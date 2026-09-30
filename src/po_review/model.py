@@ -392,7 +392,7 @@ def _metrics(connection, data, start, as_of):
                 "Operational rows and interactions are synthetic; no real organisation's operational records, interviews or intervention outcomes are represented.",
                 "Arrival uses the original immutable invoice PO reference; current uses the latest eligible REFERENCE_CONFIRMED event.",
                 "Evidence must be both effective and recorded on or before the report cutoff. Pre-receipt state recorded after receipt makes arrival UNKNOWN; exact-receipt transitions have unknown ordering.",
-                "Latest effective timestamp wins. Conflicting states or references tied at that timestamp are UNKNOWN. Future events cannot change assessments.",
+                "Latest effective timestamp wins. Conflicting states or references tied at that timestamp are UNKNOWN. Valid later events are excluded by cutoff; conflicting versions of an event ID can invalidate earlier history and make affected assessments UNKNOWN.",
                 "Commercial-document collisions compare INVOICE records received on or before cutoff, including invoices before cohort start. Credit notes are a separate document kind and do not create invoice collisions.",
                 "Exclusive reason precedence: invoice history taint, commercial collision, ambiguous current reference, missing/nonexistent reference, PO history taint, unresolved identities, supplier mismatch, request mismatch, currency mismatch, creation chronology, receipt-time uncertainty, latest PO state.",
                 "A blank optional invoice request may resolve through the PO; a nonempty unknown request is UNKNOWN. A supplied unresolved request never borrows another request's owner.",
